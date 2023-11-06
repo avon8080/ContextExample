@@ -22,7 +22,38 @@ public class MainService : IMainService
         // 1. select by id
         // 2. select by title 
         // 3. find movie by title
-        var movie = _context.GetById(1);
-        Console.WriteLine($"Your movie is {movie.Title}");
+
+        while (true)
+        {
+            Console.WriteLine("Enter the corresponding #: \n\t1. Get by Id\n\t2. Get by Title\n\t3. Find movie");
+            var input = Console.ReadLine();
+            if (input == "1")
+            {
+                Console.WriteLine("Enter the Id: ");
+                var inputId = Console.ReadLine();
+                var id = int.Parse(inputId);
+                var movie = _context.GetById(id);
+                Console.WriteLine($"Your movie is {movie.Title}");
+            }
+            else if (input == "2")
+            {
+                Console.WriteLine("Enter the title: ");
+                var title = Console.ReadLine();
+                var movie = _context.GetByTitle(title);
+                Console.WriteLine($"Your movie is {movie.Title}");
+            }
+            else if (input == "3")
+            {
+                Console.WriteLine("Enter the movie: ");
+                var inputMovie = Console.ReadLine();
+                var movie = _context.FindMovie(inputMovie);
+                Console.WriteLine("List movies: ");
+                foreach (var moviesMovie in movie)
+                {
+                    Console.WriteLine($"Your movie is Id: {moviesMovie.Id} -- {moviesMovie.Title}");
+                }
+            }
+        }
+        
     }
 }
